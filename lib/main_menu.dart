@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MainMenu extends StatelessWidget {
   const MainMenu({super.key});
+
+  // Function to open webpage
+  Future<void> _launchURL() async {
+    final Uri url = Uri.parse("https://umb.edu.co/");
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+      throw Exception('Could not launch $url');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +26,7 @@ class MainMenu extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(double.infinity, 50),
               ),
-              onPressed: () {
-                print('To be defined: Página Institucional');
-              },
+              onPressed: _launchURL, // Open the UMB website
               child: const Text("Página Institucional"),
             ),
             const SizedBox(height: 20),
@@ -30,7 +37,7 @@ class MainMenu extends StatelessWidget {
                 minimumSize: const Size(double.infinity, 50),
               ),
               onPressed: () {
-                print('To be defined: Buscar Páginas');
+                // TODO: Implement search page
               },
               child: const Text("Buscar Páginas"),
             ),
@@ -42,8 +49,7 @@ class MainMenu extends StatelessWidget {
                 minimumSize: const Size(double.infinity, 50),
               ),
               onPressed: () {
-                // TODO: Implement functionality
-                print('To be defined: Mensajes');
+                // TODO: Implement messages page
               },
               child: const Text("Mensajes"),
             ),
